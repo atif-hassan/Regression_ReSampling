@@ -6,7 +6,7 @@ with open("README.md", "r") as fh:
     
 setuptools.setup(
      name = 'reg_resampler',  
-     version = '1.0.2',
+     version = '1.0.3',
      author = "Atif Hassan, Venkata Sai Krithik",
      author_email = "atif.hit.hassan@gmail.com, pvsaikrithik@gmail.com",
      description = "An interface to apply your favourite re-sampler on regression tasks.",
