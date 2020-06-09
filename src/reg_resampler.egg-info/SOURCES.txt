@@ -1,0 +1,8 @@
+README.md
+setup.py
+src/reg_resampler.py
+src/reg_resampler.egg-info/PKG-INFO
+src/reg_resampler.egg-info/SOURCES.txt
+src/reg_resampler.egg-info/dependency_links.txt
+src/reg_resampler.egg-info/requires.txt
+src/reg_resampler.egg-info/top_level.txt
