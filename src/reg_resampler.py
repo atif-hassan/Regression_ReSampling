@@ -44,7 +44,7 @@ class resampler:
         
         # Pretty print
         print("Class Distribution:\n-------------------")
-        classes_count = list(map(list, Counter(self.Y_classes).items()))
+        classes_count = list(map(list, self.Counter(self.Y_classes).items()))
         classes_count = sorted(classes_count, key = lambda x: x[0])
         for class_, count in classes_count:
             print(str(class_)+": "+str(count))
@@ -88,7 +88,7 @@ class resampler:
 
         # Merge classes if number of neighbours is more than the number of samples
         if nbs > 0:
-            classes_count = list(map(list, Counter(self.Y_classes).items()))
+            classes_count = list(map(list, self.Counter(self.Y_classes).items()))
             classes_count = sorted(classes_count, key = lambda x: x[0])
             mid_point = len(classes_count)//2
             # Logic for merging
