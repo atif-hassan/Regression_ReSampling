@@ -3,7 +3,7 @@ class resampler:
         import pandas as pd
         from sklearn.preprocessing import LabelEncoder
         from collections import Counter
-        from numpy import np
+        import numpy as np
         self.bins = 3
         self.pd = pd
         self.LabelEncoder = LabelEncoder
