@@ -34,7 +34,7 @@ rs = resampler()
 # Returned dataframe contains a new column called "classes"
 # The function also prints the class distribution
 # This is for analysis purpose
-df_train_ = resample.fit(df_train, target, bins=7)
+df_train_ = rs.fit(df_train, target, bins=7)
 
 # Create a smote (over-sampling) object from imblearn
 smote = SMOTE(random_state=27)
