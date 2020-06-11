@@ -41,7 +41,7 @@ smote = SMOTE(random_state=27)
 
 # Now resample
 # You might recieve warning about class merger for low sample classes
-df_train_ = resample.resample(smote)
+df_train_ = rs.resample(smote)
 df_train_.head()
 ```
 
