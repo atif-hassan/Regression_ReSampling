@@ -69,4 +69,3 @@ You can find further [tutorials](https://github.com/atif-hassan/Regression_ReSam
 
 ## Feature Request
 Drop us an email at **atif.hit.hassan@gmail.com** or **pvsaikrithik@gmail.com** if you want any particular feature
-
