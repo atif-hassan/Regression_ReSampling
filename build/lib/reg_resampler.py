@@ -73,39 +73,48 @@ class resampler:
         params = sampler_obj.get_params()
         
         if "k_neighbors" in params:
-            k_nbs = params["k_neighbors"]
+            try:
+                k_nbs = int(params["k_neighbors"])
+            except:
+                k_nbs = 0
         if "n_neighbors" in params:
-            n_nbs = params["n_neighbors"]
+            try:
+                n_nbs = int(params["k_neighbors"])
+            except:
+                n_nbs = 0
         if "n_neighbors_ver3" in params:
-            n_nbs_v3 = params["n_neighbors_ver3"]
+            try:
+                n_nbs_v3 = int(params["k_neighbors"])
+            except:
+                n_nbs_v3 = 0
         if "m_neighbors" in params:
-            m_nbs = params["m_neighbors"]
+            try:
+                m_nbs = int(params["k_neighbors"])
+            except:
+                m_nbs = 0
         if "smote__k_neighbors" in params:
-            k_nbs = params["smote__k_neighbors"]
+            try:
+                k_nbs = int(params["k_neighbors"])
+            except:
+                k_nbs = 0
 
         # Choose the max value
         nbs = max([k_nbs, n_nbs, m_nbs, n_nbs_v3])
-
         # Merge classes if number of neighbours is more than the number of samples
         if nbs > 0:
             classes_count = list(map(list, self.Counter(self.Y_classes).items()))
             classes_count = sorted(classes_count, key = lambda x: x[0])
-            mid_point = len(classes_count)//2
+            mid_point = len(classes_count)
             # Logic for merging
             for i in range(len(classes_count)):
-                if i <= mid_point:
-                    if classes_count[i][1] <= nbs:
-                        self.Y_classes[self.np.where(self.Y_classes == classes_count[i][0])[0]] = classes_count[i+1][0]
-                        print("Warning: Class " + str(classes_count[i][0]) + " has been merged into Class " + str(classes_count[i+1][0]) + " due to low number of samples")
-                        classes_count[i][0] = classes_count[i+1][0]
-                else:
-                    if classes_count[i][1] <= nbs:
+                  if classes_count[i][1] <= nbs:
                         self.Y_classes[self.np.where(self.Y_classes == classes_count[i][0])[0]] = classes_count[i-1][0]
                         print("Warning: Class " + str(classes_count[i][0]) + " has been merged into Class " + str(classes_count[i-1][0]) + " due to low number of samples")
                         classes_count[i][0] = classes_count[i-1][0]
-
         # Finally, perform the re-sampling
         resampled_data, _ = sampler_obj.fit_resample(self.X, self.Y_classes)
+        if type(resampled_data).__module__ == 'numpy':
+            resampled_data = self.pd.DataFrame(resampled_data,columns= self.X.columns)
         # Drop the extra class
         resampled_data.drop(["classes"], axis=1, inplace=True)
         # Return the correct type
