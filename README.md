@@ -35,9 +35,8 @@ resample(sampler_obj, trainX, trainY)
 - **trainX** - Either a pandas dataframe or numpy matrix. Data to be resampled. Also, contains the target variable
 - **trainY** - Numpy array of psuedo classes obtained from fit function.
 
-  
-**Important Note:** All functions return the same data type as provided in input.
-  
+### Important Note
+All functions return the same data type as provided in input.
 
 ### How to import?
 ```python
@@ -62,7 +61,7 @@ smote = SMOTE(random_state=27)
 final_X, final_Y = rs.resample(smote, df_train, Y_classes)
 ```
 
-### Tutorials
+## Tutorials
 You can find further [tutorials](https://github.com/atif-hassan/Regression_ReSampling/tree/master/tutorials) on how to use this library for cross-validation
 
 ## Future Ideas
