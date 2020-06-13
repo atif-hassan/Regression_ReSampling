@@ -15,9 +15,9 @@ While we were working on a regression task, we realized that the target variable
 
 ### Functions and parameters
 ```python
+# This returns a numpy list of classes for each corresponding sample. It also automatically merges classes when required
 fit(X, target, bins=3, min_n_samples=6, balanced_binning=False, verbose=2)
 ```
-This returns a numpy list of classes for each corresponding sample. It also automatically merges classes when required
 #### Parameters:
 - **X** - Either a pandas dataframe or numpy matrix. Complete data to be resampled.
 - **target** - Either string (for pandas) or index (for numpy). The target variable to be resampled.
@@ -27,15 +27,17 @@ This returns a numpy list of classes for each corresponding sample. It also auto
 - **verbose=2** - 0 will disable print by package, 1 will print info about class mergers and 2 will also print class distributions.
 
 ```python
+# Performs resampling and returns the resampled dataframe/numpy matrices in the form of data and target variable.
 resample(sampler_obj, trainX, trainY)
 ```
-Performs resampling and returns the resampled dataframe/numpy matrices in the form of data and target variable.
 #### Parameters:
 - **sampler_obj** - Your favourite resampling algorithm's object (currently supports imblearn)
 - **trainX** - Either a pandas dataframe or numpy matrix. Data to be resampled. Also, contains the target variable
 - **trainY** - Numpy array of psuedo classes obtained from fit function.
 
-**Important Note:** All functions return the same data type as provided in input
+\
+**Important Note:** All functions return the same data type as provided in input.\
+\
 
 ### How to import?
 ```python
