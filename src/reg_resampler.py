@@ -79,24 +79,26 @@ class resampler:
                 k_nbs = 0
         if "n_neighbors" in params:
             try:
-                n_nbs = int(params["k_neighbors"])
+                n_nbs = int(params["n_neighbors"])
             except:
                 n_nbs = 0
         if "n_neighbors_ver3" in params:
             try:
-                n_nbs_v3 = int(params["k_neighbors"])
+                n_nbs_v3 = int(params["n_neighbors_ver3"])
             except:
                 n_nbs_v3 = 0
         if "m_neighbors" in params:
             try:
-                m_nbs = int(params["k_neighbors"])
+                m_nbs = int(params["m_neighbors"])
             except:
                 m_nbs = 0
-        if "smote__k_neighbors" in params:
+        if "smote" in params and "smote__k_neighbors" in params:
             try:
-                k_nbs = int(params["k_neighbors"])
+                k_nbs = int(params["smote__k_neighbors"])
             except:
                 k_nbs = 0
+        elif "smote" in params:
+            k_nbs = 5
 
         # Choose the max value
         nbs = max([k_nbs, n_nbs, m_nbs, n_nbs_v3])
