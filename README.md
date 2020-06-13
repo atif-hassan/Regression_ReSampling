@@ -13,9 +13,6 @@ While we were working on a regression task, we realized that the target variable
 ## How to install?
 ```pip install reg_resampler```
 
-## How to use it?
-- **sampler_obj** - Resampling object. Currently, it supports all resampling techniques present in **imblearn**.
-
 ### Functions and parameters
 ```python
 fit(X, target, bins=3, min_n_samples=6, balanced_binning=False, verbose=2)
@@ -25,7 +22,7 @@ This returns a numpy list of classes for each corresponding sample. It also auto
 - **X** - Either a pandas dataframe or numpy matrix. Complete data to be resampled.
 - **target** - Either string (for pandas) or index (for numpy). The target variable to be resampled.
 - **bins=3** - The number of classes that the user wants to generate. (Default: 3)
-- **min_n_samples=6** - The number of minimum samples in each bin. Has to be more than neighbours in imblearn. (Default: 6)
+- **min_n_samples=6** - Number of minimum samples in each bin. Has to be more than neighbours in imblearn. (Default: 6)
 - **balanced_binning=False** - Decides whether samples are to be distributed roughly equally across all classes. (Default: False)
 - **verbose=2** - 0 will disable print by package, 1 will print info about class mergers and 2 will also print class distributions.
 
