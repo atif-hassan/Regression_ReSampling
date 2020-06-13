@@ -1,6 +1,5 @@
 [![Downloads](https://pepy.tech/badge/reg-resampler)](https://pepy.tech/project/reg-resampler)
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/atif-hassan/Regression_ReSampling/commits/master)
-
 [![forthebadge made-with-python](http://ForTheBadge.com/images/badges/made-with-python.svg)](https://www.python.org/)
 [![ForTheBadge built-with-love](http://ForTheBadge.com/images/badges/built-with-love.svg)](https://github.com/atif-hassan/)
 # Regression ReSampling
