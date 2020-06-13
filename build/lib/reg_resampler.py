@@ -14,14 +14,14 @@ class resampler:
         self.np = np
 
     # This function adds classes to each sample and returns an augmented dataframe/numpy matrix
-    def fit(self, X, target, bins=3, balanced_binning=False):
+    def fit(self, X, target, bins=3, min_n_samples=6, balanced_binning=False, verbose=2):
         self.bins = bins
         tmp = target
         
         # If data is numpy, then convert it into pandas
         if type(target) == int:
-            if target == -1:
-                target = X.shape[1]-1
+            if target < 0:
+                target = X.shape[1]+target
                 tmp = target
             self.X = self.pd.DataFrame()
             for i in range(X.shape[1]):
@@ -42,85 +42,53 @@ class resampler:
         le = self.LabelEncoder()
         self.Y_classes = le.fit_transform(self.Y_classes)
         
-        # Pretty print
-        print("Class Distribution:\n-------------------")
+        # Merge classes if number of neighbours is more than the number of samples
         classes_count = list(map(list, self.Counter(self.Y_classes).items()))
         classes_count = sorted(classes_count, key = lambda x: x[0])
-        for class_, count in classes_count:
-            print(str(class_)+": "+str(count))
+        mid_point = len(classes_count)
+        # Logic for merging
+        for i in range(len(classes_count)):
+              if classes_count[i][1] < min_n_samples:
+                    self.Y_classes[self.np.where(self.Y_classes == classes_count[i][0])[0]] = classes_count[i-1][0]
+                    if verbose > 0:
+                        print("INFO: Class " + str(classes_count[i][0]) + " has been merged into Class " + str(classes_count[i-1][0]) + " due to low number of samples")
+                    classes_count[i][0] = classes_count[i-1][0]
+        if verbose > 0:
+            print()
+        
+        # Pretty print
+        if verbose > 1:
+            print("Class Distribution:\n-------------------")
+            classes_count = list(map(list, self.Counter(self.Y_classes).items()))
+            classes_count = sorted(classes_count, key = lambda x: x[0])
+            for class_, count in classes_count:
+                print(str(class_)+": "+str(count))
+            print()
         
         # Finally concatenate and return as dataframe or numpy
         # Based on what type of target was sent
         self.X["classes"] = self.Y_classes
         if type(tmp) == int:
             self.target = tmp
-            return self.X.values
         else:
             self.target = target
-            return self.X
-        
+        return self.Y_classes 
+    
     # This function performs the re-sampling
     # It also merges classes as and when required
-    def resample(self, sampler_obj):
+    def resample(self, sampler_obj, trainX, trainY):
         # If classes haven't yet been created, then run the "fit" function
         if type(self.Y_classes) == int:
             print("Error! Run fit method first!!")
             return None
 
-        # These are the imblearn parameters that require certain number of samples
-        # So we need to merge classes having samples less than the value of these hyper-parameters
-        k_nbs, n_nbs, m_nbs, n_nbs_v3 = 0, 0, 0, 0
-        params = sampler_obj.get_params()
-        
-        if "k_neighbors" in params:
-            try:
-                k_nbs = int(params["k_neighbors"])
-            except:
-                k_nbs = 0
-        if "n_neighbors" in params:
-            try:
-                n_nbs = int(params["n_neighbors"])
-            except:
-                n_nbs = 0
-        if "n_neighbors_ver3" in params:
-            try:
-                n_nbs_v3 = int(params["n_neighbors_ver3"])
-            except:
-                n_nbs_v3 = 0
-        if "m_neighbors" in params:
-            try:
-                m_nbs = int(params["m_neighbors"])
-            except:
-                m_nbs = 0
-        if "smote" in params and "smote__k_neighbors" in params:
-            try:
-                k_nbs = int(params["smote__k_neighbors"])
-            except:
-                k_nbs = 0
-        elif "smote" in params:
-            k_nbs = 5
-
-        # Choose the max value
-        nbs = max([k_nbs, n_nbs, m_nbs, n_nbs_v3])
-        # Merge classes if number of neighbours is more than the number of samples
-        if nbs > 0:
-            classes_count = list(map(list, self.Counter(self.Y_classes).items()))
-            classes_count = sorted(classes_count, key = lambda x: x[0])
-            mid_point = len(classes_count)
-            # Logic for merging
-            for i in range(len(classes_count)):
-                  if classes_count[i][1] <= nbs:
-                        self.Y_classes[self.np.where(self.Y_classes == classes_count[i][0])[0]] = classes_count[i-1][0]
-                        print("Warning: Class " + str(classes_count[i][0]) + " has been merged into Class " + str(classes_count[i-1][0]) + " due to low number of samples")
-                        classes_count[i][0] = classes_count[i-1][0]
         # Finally, perform the re-sampling
-        resampled_data, _ = sampler_obj.fit_resample(self.X, self.Y_classes)
+        resampled_data, _ = sampler_obj.fit_resample(trainX, trainY)
         if type(resampled_data).__module__ == 'numpy':
-            resampled_data = self.pd.DataFrame(resampled_data,columns= self.X.columns)
-        # Drop the extra class
-        resampled_data.drop(["classes"], axis=1, inplace=True)
-        # Return the correct type
+            resampled_data = self.pd.DataFrame(resampled_data, columns=self.X.drop("classes", axis=1).columns)
+
+        # Return the correct X and Y
         if type(self.target) == int:
-            return resampled_data.values
+            return resampled_data.drop("target", axis=1).values, resampled_data["target"].values
         else:
-            return resampled_data
+            return resampled_data.drop(self.target, axis=1), resampled_data[self.target]
