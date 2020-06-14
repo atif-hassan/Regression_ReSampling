@@ -22,7 +22,7 @@ fit(X, target, bins=3, min_n_samples=6, balanced_binning=False, verbose=2)
 - **X** - Either a pandas dataframe or numpy matrix. Complete data to be resampled.
 - **target** - Either string (for pandas) or index (for numpy). The target variable to be resampled.
 - **bins=3** - The number of classes that the user wants to generate. (Default: 3)
-- **min_n_samples=6** - Minimum number of samples in each bin. Bins having less than this value will be merged with the closes bin. Has to be more than neighbours in imblearn. (Default: 6)
+- **min_n_samples=6** - Minimum number of samples in each bin. Bins having less than this value will be merged with the closest bin. Has to be more than neighbours in imblearn. (Default: 6)
 - **balanced_binning=False** - Decides whether samples are to be distributed roughly equally across all classes. (Default: False)
 - **verbose=2** - 0 will disable print by package, 1 will print info about class mergers and 2 will also print class distributions.
 
