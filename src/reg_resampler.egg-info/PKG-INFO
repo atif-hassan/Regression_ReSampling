@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: reg-resampler
-Version: 2.0.1
+Version: 2.1.0
 Summary: An interface to apply your favourite re-sampler on regression tasks.
 Home-page: https://github.com/atif-hassan/Regression_ReSampling/
 Author: Atif Hassan, Venkata Sai Krithik
@@ -30,7 +30,7 @@ Description: [![forthebadge made-with-python](http://ForTheBadge.com/images/badg
         - **X** - Either a pandas dataframe or numpy matrix. Complete data to be resampled.
         - **target** - Either string (for pandas) or index (for numpy). The target variable to be resampled.
         - **bins=3** - The number of classes that the user wants to generate. (Default: 3)
-        - **min_n_samples=6** - Number of minimum samples in each bin. Has to be more than neighbours in imblearn. (Default: 6)
+        - **min_n_samples=6** - Minimum number of samples in each bin. Bins having less than this value will be merged with the closest bin. Has to be more than neighbours in imblearn. (Default: 6)
         - **balanced_binning=False** - Decides whether samples are to be distributed roughly equally across all classes. (Default: False)
         - **verbose=2** - 0 will disable print by package, 1 will print info about class mergers and 2 will also print class distributions.
         
@@ -77,6 +77,7 @@ Description: [![forthebadge made-with-python](http://ForTheBadge.com/images/badg
         
         ## Feature Request
         Drop us an email at **atif.hit.hassan@gmail.com** or **pvsaikrithik@gmail.com** if you want any particular feature
+        
 Platform: UNKNOWN
 Classifier: Programming Language :: Python :: 3
 Classifier: Programming Language :: Python :: 3.6

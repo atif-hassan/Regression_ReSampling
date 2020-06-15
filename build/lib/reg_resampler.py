@@ -1,4 +1,4 @@
-class resampler:
+class resampler2:
     def __init__(self):
         import pandas as pd
         from sklearn.preprocessing import LabelEncoder
@@ -13,7 +13,8 @@ class resampler:
         self.target = 0
         self.np = np
 
-    # This function adds classes to each sample and returns an augmented dataframe/numpy matrix
+    # This function adds classes to each sample and returns the class list as a dataframe/numpy array (as per input)
+    # It also merges classes as and when required
     def fit(self, X, target, bins=3, min_n_samples=6, balanced_binning=False, verbose=2):
         self.bins = bins
         tmp = target
@@ -56,6 +57,11 @@ class resampler:
         if verbose > 0:
             print()
         
+        # Perform label-encoding once again
+        # Avoids class skipping after merging
+        le = self.LabelEncoder()
+        self.Y_classes = le.fit_transform(self.Y_classes)
+        
         # Pretty print
         if verbose > 1:
             print("Class Distribution:\n-------------------")
@@ -73,9 +79,10 @@ class resampler:
         else:
             self.target = target
         return self.Y_classes 
+
+
     
     # This function performs the re-sampling
-    # It also merges classes as and when required
     def resample(self, sampler_obj, trainX, trainY):
         # If classes haven't yet been created, then run the "fit" function
         if type(self.Y_classes) == int:
