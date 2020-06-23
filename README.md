@@ -5,7 +5,7 @@
 [![Downloads](https://pepy.tech/badge/reg-resampler)](https://pepy.tech/project/reg-resampler)
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/atif-hassan/Regression_ReSampling/commits/master)
 # Regression ReSampling
-An interface to apply your favourite resampler on regression tasks. Currently supports all resampling techniques present in **imblearn**
+A python library for repurposing traditional classification-based resampling (undersampling and/or oversampling) techniques for regression tasks. Currently supports all resampling techniques present in **imblearn**
 
 ## Why does this exist?
 While we were working on a regression task, we realized that the target variable was skewed, i.e., most samples were present in a particular range. One can easily solve the skew problem for classification tasks via a slew of resampling techniques (either under or over sampling) but this luxury is unavailable for regression tasks. We therefore decided to create an interface that can repurpose all resampling techniques for classification problems to regression problems! 
