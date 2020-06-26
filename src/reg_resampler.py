@@ -1,4 +1,4 @@
-class resampler2:
+class resampler:
     def __init__(self):
         import pandas as pd
         from sklearn.preprocessing import LabelEncoder

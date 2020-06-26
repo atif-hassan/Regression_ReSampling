@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: reg-resampler
-Version: 2.1.0
+Version: 2.1.1
 Summary: An interface to apply your favourite re-sampler on regression tasks.
 Home-page: https://github.com/atif-hassan/Regression_ReSampling/
 Author: Atif Hassan, Venkata Sai Krithik
@@ -13,7 +13,7 @@ Description: [![forthebadge made-with-python](http://ForTheBadge.com/images/badg
         [![Downloads](https://pepy.tech/badge/reg-resampler)](https://pepy.tech/project/reg-resampler)
         [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/atif-hassan/Regression_ReSampling/commits/master)
         # Regression ReSampling
-        An interface to apply your favourite resampler on regression tasks. Currently supports all resampling techniques present in **imblearn**
+        A python library for repurposing traditional classification-based resampling (undersampling and/or oversampling) techniques for regression tasks. Currently supports all resampling techniques present in **imblearn**
         
         ## Why does this exist?
         While we were working on a regression task, we realized that the target variable was skewed, i.e., most samples were present in a particular range. One can easily solve the skew problem for classification tasks via a slew of resampling techniques (either under or over sampling) but this luxury is unavailable for regression tasks. We therefore decided to create an interface that can repurpose all resampling techniques for classification problems to regression problems! 
@@ -21,12 +21,11 @@ Description: [![forthebadge made-with-python](http://ForTheBadge.com/images/badg
         ## How to install?
         ```pip install reg_resampler```
         
-        ### Functions and parameters
+        ## Functions and parameters
         ```python
         # This returns a numpy list of classes for each corresponding sample. It also automatically merges classes when required
         fit(X, target, bins=3, min_n_samples=6, balanced_binning=False, verbose=2)
         ```
-        #### Parameters:
         - **X** - Either a pandas dataframe or numpy matrix. Complete data to be resampled.
         - **target** - Either string (for pandas) or index (for numpy). The target variable to be resampled.
         - **bins=3** - The number of classes that the user wants to generate. (Default: 3)
@@ -38,7 +37,6 @@ Description: [![forthebadge made-with-python](http://ForTheBadge.com/images/badg
         # Performs resampling and returns the resampled dataframe/numpy matrices in the form of data and target variable.
         resample(sampler_obj, trainX, trainY)
         ```
-        #### Parameters:
         - **sampler_obj** - Your favourite resampling algorithm's object (currently supports imblearn)
         - **trainX** - Either a pandas dataframe or numpy matrix. Data to be resampled. Also, contains the target variable
         - **trainY** - Numpy array of psuedo classes obtained from fit function.
@@ -46,12 +44,12 @@ Description: [![forthebadge made-with-python](http://ForTheBadge.com/images/badg
         ### Important Note
         All functions return the same data type as provided in input.
         
-        ### How to import?
+        ## How to import?
         ```python
         from reg_resampler import resampler
         ```
         
-        ### How to use?
+        ## Usage
         ```python
         # Initialize the resampler object
         rs = resampler()
