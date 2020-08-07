@@ -3,7 +3,6 @@
 
 [![PyPI version shields.io](https://img.shields.io/pypi/v/reg-resampler.svg)](https://pypi.python.org/pypi/reg-resampler/)
 [![Downloads](https://pepy.tech/badge/reg-resampler)](https://pepy.tech/project/reg-resampler)
-[![HitCount](http://hits.dwyl.com/atif-hassan/Regression_ReSampling.svg)](http://hits.dwyl.com/atif-hassan/Regression_ReSampling)
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/atif-hassan/Regression_ReSampling/commits/master)
 # Regression ReSampling
 A python library for repurposing traditional classification-based resampling (undersampling and/or oversampling) techniques for regression tasks. Currently supports all resampling techniques present in **imblearn**
